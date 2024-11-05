@@ -16,7 +16,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-function ProductsCRUDDemo() {
+function Products() {
   let emptyProduct = {
     id: null,
     code: '',
@@ -341,4 +341,4 @@ function ProductsCRUDDemo() {
   );
 }
 
-export default ProductsCRUDDemo;
+export default Products;

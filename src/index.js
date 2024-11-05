@@ -8,15 +8,15 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
-import { PrimeReactProvider } from 'primereact/api';
+//import { PrimeReactProvider } from 'primereact/api';
+import { BrowserRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <PrimeReactProvider>
+    <BrowserRouter>
       <App />
-    </PrimeReactProvider>
-
+    </BrowserRouter>
   </React.StrictMode>
 );
 
