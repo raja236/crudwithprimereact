@@ -259,7 +259,7 @@ function Products() {
         <DataTable ref={dt} value={products} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)} dataKey="id" paginator
           rows={10} rowsPerPageOptions={[5, 10, 25]}
           paginatorTemplate="FirstPageLink PrevPageLink PageLlinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header} >
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header} scrollable scrollHeight="450px" style={{ minWidth: '50rem' }} >
           <Column selectionMode="multiple" exportable={false}></Column>
           <Column field="code" header="Code" sortable style={{ minWidth: "12rem" }}></Column>
           <Column field="name" header="Name" sortable style={{ minWidth: "16rem" }}></Column>

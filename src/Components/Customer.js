@@ -194,7 +194,7 @@ const Customer = () => {
       <DataTable value={customers} paginator header={header} rows={10} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[10, 25, 50]} dataKey="id" selectionMode="checkbox" selection={selectedCustomers} onSelectionChange={(e) => setSelectedCustomers(e.value)} filters={filters}
         filterDelay="menu" globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customer found. "
-        currentPageReportTemplate='Showing {first} to {last} of {totalRecords} entries' >
+        currentPageReportTemplate='Showing {first} to {last} of {totalRecords} entries' scrollable scrollHeight="450px" style={{ minWidth: '50rem' }} >
         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
         <Column field='name' header='Name' sortable filter filterPlaceholder='Search by name' style={{ minWidth: '14rem' }}></Column>
         <Column field='country.name' header='Country' sortable filteraField="country.name" style={{ minWidth: "14rem" }} body={countryBodyTemplate} filter filterPlaceholder='Searrch by country'></Column>

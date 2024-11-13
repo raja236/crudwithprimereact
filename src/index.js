@@ -9,14 +9,14 @@ import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
 //import { PrimeReactProvider } from 'primereact/api';
-import { BrowserRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+   
       <App />
-    </BrowserRouter>
+   
   </React.StrictMode>
 );
 
