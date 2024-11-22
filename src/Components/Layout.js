@@ -59,7 +59,32 @@ export default function Layout() {
                    command: () => {
                     navigate('fetchProducts');
                 }
-                }
+                },
+        
+                {
+                    key: "5-0",
+                    label: 'Author',
+                    icon: 'pi pi-users',
+                    command: () => {
+                        navigate('Author');
+                    }
+                },
+                {
+                    key: "6-0",
+                    label: 'Books',
+                    icon: 'pi pi-book',
+                    command: () => {
+                        navigate('Books');
+                    }
+                }, 
+                {
+                    key: "7-0",
+                    label: 'ReUsableComp',
+                    icon: 'pi pi-book',
+                    command: () => {
+                        navigate('ReUsableComp');
+                    }
+                },
             ]
         }
     ]

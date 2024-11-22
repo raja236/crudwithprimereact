@@ -9,7 +9,7 @@ import { Tag } from 'primereact/tag';
 import { ProductService } from '../service/ProductService';
 import { AutoComplete } from 'primereact/autocomplete';
 import { Button } from 'primereact/button';
-export default function RowEditingProduct() {
+export default function RowEditingProduct({ gridname,modifiedData : changedData }) {
     let emptyProduct = {
         id: null,
         code: '',
@@ -21,7 +21,7 @@ export default function RowEditingProduct() {
         quantity: 0,
         inventoryStatus: 'INSTOCK',
         rating: 0
-      };
+    };
     const [products, setProducts] = useState(null);
     const [statuses] = useState(['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK']);
     const [values] = useState(['good', 'bad', 'excellent']);
@@ -48,7 +48,38 @@ export default function RowEditingProduct() {
         }
     };
 
-    const onRowEditComplete = ({ newData, rowData }, e) => {
+    const onRowEditComplete = ({ newData, rowData }) => {
+        if (gridname !== undefined && gridname === 'gridOne') {
+           if(newData.code !== ''&&  newData.name !== ''){
+                onRowEditCompleteCall(newData, rowData);
+                changedData(gridname,newData);
+           }else{
+            alert('code and name are required')
+            
+           }
+        } 
+       else if (gridname !== undefined && gridname === 'gridTwo') {
+            if(newData.price !== null &&  newData.description !== ''){
+                onRowEditCompleteCall(newData, rowData);
+                changedData(gridname,newData);
+            }else{
+           
+             alert('price and description are required')
+            }
+         }
+         else if (gridname !== undefined && gridname === 'gridThree') {
+            if(newData.code !== ''&&  newData.name !== ''&& newData.price !== null &&  newData.description !== ''){
+                onRowEditCompleteCall(newData, rowData);
+             changedData(gridname,newData);
+            }else{
+             alert('all fields are required')
+            }
+         }
+        else {
+            onRowEditCompleteCall(newData, rowData);
+        }
+    };
+    const onRowEditCompleteCall =(newData, rowData)=>{
         let _products = [...products];
         let index = _products.findIndex(e => e.id == rowData?.id);
         _products[index] = newData;
@@ -58,7 +89,7 @@ export default function RowEditingProduct() {
             delete updated[rowData?.id]
             return updated
         })
-    };
+    }
 
     const textEditor = (options) => {
         const { rowData } = options
@@ -147,9 +178,8 @@ export default function RowEditingProduct() {
     }
 
     const deleteRow = (rowData) => {
-     let _products = products.filter((val) => val.id !== rowData.id);
-     setProducts(_products);
-
+        let _products = products.filter((val) => val.id !== rowData.id);
+        setProducts(_products);
     };
 
     const actionsbodyTemplate = (rowData) => {
@@ -173,17 +203,17 @@ export default function RowEditingProduct() {
 
 
     };
-    const openNew = ()=>{
+    const openNew = () => {
         let _products = [...products];
         let index = _products.length;
-        emptyProduct.id =  (parseInt(_products[index - 1].id) +1).toString();
-        emptyProduct.name ='XXXXXX'
+        emptyProduct.id = (parseInt(_products[index - 1].id) + 1).toString();
+        emptyProduct.name = 'XXXXXX'
         _products[index] = emptyProduct;
         setProducts(_products);
         setEditingRows(prev => {
             return {
                 ...prev,
-                [ emptyProduct.id]: emptyProduct
+                [emptyProduct.id]: emptyProduct
             }
         })
     }
@@ -193,20 +223,20 @@ export default function RowEditingProduct() {
     //     </div>
     //   );
 
-      const renderHeader = () => {
+    const renderHeader = () => {
         return (
-          <div className='flex flex-wrap gap-2'>
-             <Button label='New' icon="pi pi-plus" style={{width:'10%'}} severity="success" onClick={openNew}></Button>
-          </div>
+            <div className='flex flex-wrap gap-2'>
+                <Button label='New' icon="pi pi-plus" style={{ width: '10%' }} severity="success" onClick={openNew}></Button>
+            </div>
         );
-      };
-    
-      const header = renderHeader();
+    };
+
+    const header = renderHeader();
     return (
         <div className="card p-fluid">
             {/* <Toolbar className="mb-4" start={leftToolbarTemplate}></Toolbar> */}
             <DataTable
-                value={products} header ={header} editMode="row" dataKey="id"  tableStyle={{ minWidth: '50rem' }}
+                value={products} header={header} editMode="row" dataKey="id" tableStyle={{ minWidth: '50rem' }}
                 editingRows={editingRows}
                 onRowEditChange={(e) => {
                     setEditingRows(e.data)

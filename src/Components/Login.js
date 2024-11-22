@@ -4,11 +4,9 @@ import { FloatLabel } from 'primereact/floatlabel';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
-import { useNavigate } from "react-router-dom";
 const Login = (p) => {
     const [input, setInput] = useState({ Email: '', password: '' })
     const auth = useAuth();
-    const navigate = useNavigate();
     const handleSubmitEvent = (e)=>{
         e.preventDefault();
         if(input.userName!== "" && input.password!== ""){

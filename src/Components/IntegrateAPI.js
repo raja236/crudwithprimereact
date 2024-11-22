@@ -8,6 +8,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { FileUpload } from "primereact/fileupload";
+import { Link } from 'react-router-dom';
 export default function IntegrateAPI() {
   let emptyProduct = {
     availabilityStatus: "In Stock",
@@ -48,9 +49,9 @@ export default function IntegrateAPI() {
   }, []
   );
 
-  console.log(products);
-  console.log(productPeageLenth.current);
-  console.log(editingRows)
+  // console.log(products);
+  // console.log(productPeageLenth.current);
+  // console.log(editingRows)
 
   const representativeBodyTemplate = (rowData) => {
     let image = rowData.images;
@@ -125,7 +126,6 @@ export default function IntegrateAPI() {
       })
   }
   const saveRecords = async () => {
-    debugger;
     Object.keys(modifiedRecords).forEach(key => {
       const product = modifiedRecords[key];
       if (typeof (product.id) != 'number' && product?.id.includes("new")) {
@@ -152,7 +152,7 @@ export default function IntegrateAPI() {
         <Button label="Save" icon="pi pi-check" style={{ width: '10%', float: 'right' }} onClick={saveRecords} />
       </div>
     );
-  }
+  };
   const onRowEditComplete = ({ newData, rowData }) => {
     let _products = [...products];
     let index = _products.findIndex(e => e.id === rowData?.id);
@@ -170,14 +170,6 @@ export default function IntegrateAPI() {
     })
   };
 
-  // const newRow = { ...emptyProduct, id: "new" + products.length }
-  // setProducts([...products, newRow])
-  // setEditingRows(prev => {
-  //   return {
-  //     ...prev,
-  //     [newRow.id]: newRow
-  //   }
-  // })
   const openNew = () => {
     const newRow = { ...emptyProduct, id: "new" + products.length }
     setProducts([...products, newRow])
@@ -276,6 +268,10 @@ export default function IntegrateAPI() {
         <Rating value={value} onChange={(e) => updateRow(rowData.id, field, e.target.value)}></Rating>
       </div>)
   }
+  const titleBodyTemplate =(rowData)=>{
+    
+    return <Link to={`${rowData.id}`}>{rowData.title}</Link>
+  }
   return (
     <div className="card">
       <DataTable value={products} header={header} editMode='row' editingRows={editingRows}
@@ -283,7 +279,7 @@ export default function IntegrateAPI() {
         rows={20} rowsPerPageOptions={[5, 10, 25]}
         paginatorTemplate="FirstPageLink PrevPageLink PageLlinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" scrollable scrollHeight="450px" tableStyle={{ minWidth: '50rem' }}>
-        <Column field="title" header="Title" editor={(options) => textEditor(options)} sortable style={{ minWidth: "12rem" }}></Column>
+        <Column field="title" header="Title" body={titleBodyTemplate} editor={(options) => textEditor(options)} sortable style={{ minWidth: "12rem" }}></Column>
         <Column field="description" header="Description" editor={(options) => textEditor(options)} style={{ minWidth: "14rem" }}></Column>
         <Column field="category" header="Category" editor={(options) => textEditor(options)} sortable style={{ minWidth: "10rem" }}></Column>
         <Column field="stock" header="Quantity" sortable ></Column>
